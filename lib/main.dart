@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color.fromRGBO(25, 118, 210, 1.0),
       ),
-      initialRoute: '/book-ride',
+      initialRoute: '/payment',
       routes: {
         '/': (context) => HomeScreen(),
         '/landing': (context) => LandingScreen(),
