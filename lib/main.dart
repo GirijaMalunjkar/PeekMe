@@ -7,9 +7,7 @@ import 'Screens/BookingPayment.dart';
 import 'Screens/Landing.dart';
 import 'Screens/Login.dart';
 import 'Screens/Profile.dart';
-import 'authentication/Registration.dart';
-import 'authentication/Registration1.dart';
-import 'authentication/Registration2.dart';
+import 'authentication/RegistrationStep1.dart';
 import 'Screens/ReviewRating.dart';
 import 'Screens/RideListing.dart';
 import 'Screens/BookARide.dart';
@@ -45,8 +43,6 @@ class MyApp extends StatelessWidget {
         '/landing': (context) => LandingScreen(),
         '/login': (context) => LoginPage(),
         '/registration': (context) => RegistrationPage(),
-        '/registration1': (context) => RegistrationPage1(),
-        '/registration2': (context) => RegistrationPage2(),
         '/profile': (context) => UserProfileScreen(),
         '/review': (context) => ReviewScreen(),
         '/ride-details': (context) => RideDetailsScreen(),
