@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "353321202958",
+    "project_id": "peekme-2101e",
+    "storage_bucket": "peekme-2101e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353321202958:android:e6af657cedc9709111935f",
+        "android_client_info": {
+          "package_name": "peekme.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353321202958-u61cs5865lv4mvkn3bff7egk7bk55al1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa9PEhTSXPv-_z-pZwO5Vu1L5QRaE54Ug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353321202958-u61cs5865lv4mvkn3bff7egk7bk55al1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

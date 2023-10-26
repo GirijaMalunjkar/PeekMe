@@ -1,148 +1,131 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+//
+// void main() => runApp(LoginPage());
+//
+// class LoginPage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: LoginPage(),
+//     );
+//   }
+// }
 
-const bool loggedIn = true;
-const String cancelledByUser = 'cancelledByUser';
+class LoginPage extends StatelessWidget {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
 
-void main() => runApp(MobileLoginScreen());
+  Future<void> _signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
-class MobileLoginScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Mobile Login'),
-        ),
-        body: LoginScreen(),
-      ),
-    );
+      if (googleUser == null) return;
+
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await _auth.signInWithCredential(credential);
+      // Navigate to home page or desired screen
+    } catch (e) {
+      print(e.toString());
+      // Handle Google sign-in error
+    }
   }
-}
 
-class LoginScreen extends StatefulWidget {
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
+  Future<void> _signInWithFacebook() async {
+    try {
+      final LoginResult result = await FacebookAuth.instance.login();
 
-class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _phoneNumberController = TextEditingController();
+      if (result.status == LoginStatus.success) {
+        final AccessToken accessToken = result.accessToken!;
+        final AuthCredential credential = FacebookAuthProvider.credential(accessToken.token);
+
+        await _auth.signInWithCredential(credential);
+        // Navigate to home page or desired screen
+      } else {
+        // Handle Facebook sign-in error
+      }
+    } catch (e) {
+      print(e.toString());
+      // Handle Facebook sign-in error
+    }
+  }
+
+  Future<void> _signInWithEmailAndPassword(String email, String password) async {
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      // Navigate to home page or desired screen
+    } catch (e) {
+      print(e.toString());
+      // Handle email/password sign-in error
+    }
+  }
+
+  Future<void> _verifyPhoneNumber(String phoneNumber) async {
+    try {
+      await _auth.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          await _auth.signInWithCredential(credential);
+          // Navigate to home page or desired screen
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          print(e.message);
+          // Handle verification failure
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          // Navigate to OTP verification page and pass verificationId
+          // Use verificationId to create PhoneAuthCredential
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          // Handle code auto retrieval timeout
+        },
+      );
+    } catch (e) {
+      print(e.toString());
+      // Handle phone number verification error
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            child: Center(
-              child: InternationalPhoneNumberInput(
-                onInputChanged: (PhoneNumber number) {
-                  // Handle phone number input changes
-                },
-                inputDecoration: InputDecoration(
-                  labelText: 'Phone Number',
-                ),
-                selectorConfig: SelectorConfig(
-                  selectorType: PhoneInputSelectorType.DIALOG,
-                ),
-                ignoreBlank: false,
-                autoValidateMode: AutovalidateMode.onUserInteraction,
-                selectorTextStyle: TextStyle(color: Colors.black),
-                textFieldController: _phoneNumberController,
-                formatInput: false,
-                keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
-                // Set default country to India (IN)
-                initialValue: PhoneNumber(isoCode: 'IN'),
-              ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Login Page'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              onPressed: _signInWithGoogle,
+              child: Text('Login with Google'),
             ),
-          ),
-          SizedBox(height: 20),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: <Widget>[
-          //     SocialMediaButton('assets/facebook_icon.png', _handleFacebookLogin),
-          //     SocialMediaButton('assets/google_icon.png', _handleGoogleLogin),
-          //   ],
-          // ),
-          SizedBox(height: 20),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: ElevatedButton(
+            ElevatedButton(
+              onPressed: _signInWithFacebook,
+              child: Text('Login with Facebook'),
+            ),
+            ElevatedButton(
               onPressed: () {
-                // Perform login logic here with _phoneNumberController.text
-                if (_phoneNumberController.text.isNotEmpty) {
-                  print('Phone Number: ${_phoneNumberController.text}');
-                } else {
-                  print('Please enter a phone number.');
-                }
+                _verifyPhoneNumber('+1234567890');
               },
-              child: Text('Next'),
+              child: Text('Login with Phone Number'),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Future<void> _handleFacebookLogin() async {
-  //   final FacebookLogin facebookLogin = FacebookLogin();
-  //   final FacebookLoginResult result = await facebookLogin.logIn(['email']);
-  //
-  //   switch (result.status) {
-  //
-  //     case FacebookLoginStatus.loggedIn:
-  //       print('Facebook Login Successful. Access Token: ${result.accessToken.token}');
-  //       break;
-  //     case FacebookLoginStatus.cancelledByUser:
-  //       print('Facebook Login Cancelled');
-  //       break;
-  //     case FacebookLoginStatus.error:
-  //       print('Error during Facebook Login: ${result.errorMessage}');
-  //       break;
-  //   }
-  // }
-  //
-  // Future<void> _handleGoogleLogin() async {
-  //   try {
-  //     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-  //
-  //     if (googleUser == null) {
-  //       print('Google Login Cancelled');
-  //       return;
-  //     }
-  //
-  //     final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-  //     final AuthCredential credential = GoogleAuthProvider.credential(
-  //       accessToken: googleAuth.accessToken,
-  //       idToken: googleAuth.idToken,
-  //     );
-  //
-  //     // Use the 'credential' for further Google login logic
-  //     print('Google Login Successful. Access Token: ${googleAuth.accessToken}, ID Token: ${googleAuth.idToken}');
-  //   } catch (error) {
-  //     print('Error during Google Login: $error');
-  //   }
-  // }
-}
-
-class SocialMediaButton extends StatelessWidget {
-  final String iconPath;
-  final VoidCallback onPressed;
-
-  SocialMediaButton(this.iconPath, this.onPressed);
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      child: Image.asset(
-        iconPath,
-        width: 50,
-        height: 50,
-        fit: BoxFit.cover,
+            ElevatedButton(
+              onPressed: () {
+                _signInWithEmailAndPassword('test@example.com', 'password123');
+              },
+              child: Text('Login with Email/Password'),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -6,41 +6,44 @@ class PaymentScreen extends StatefulWidget {
   const PaymentScreen({Key? key}) : super(key: key);
 
   @override
-  _PaymentPageState createState() => _PaymentPageState();
+  _PaymentScreenState createState() => _PaymentScreenState();
 }
 
-class _PaymentPageState extends State<PaymentScreen> {
-  Razorpay? _razorpay;
+class _PaymentScreenState extends State<PaymentScreen> {
+  late Razorpay _razorpay = Razorpay();
 
   @override
   void initState() {
     super.initState();
     _razorpay = Razorpay();
-    _razorpay?.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-    _razorpay?.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
-    _razorpay?.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
   }
 
   @override
   void dispose() {
     super.dispose();
-    _razorpay?.clear();
+    _razorpay.clear();
   }
 
   void openPaymentPortal() async {
     var options = {
-      'key': 'rzp_test_9aj7T0fj6ew23i',
+      'key': 'rzp_test_9aj7T0fj6ew23i	',
       'amount': 20000,
-      'name': 'jhon',
+      'name': 'John', // Changed 'jhon' to 'John'
       'description': 'Payment',
-      'prefill': {'contact': '9999999999', 'email': 'jhon@razorpay.com'},
+      'prefill': {
+        'contact': '9999999999',
+        'email': 'john@razorpay.com'
+      }, // Changed 'jhon' to 'john'
       'external': {
         'wallets': ['paytm']
       }
     };
 
     try {
-      _razorpay?.open(options);
+      _razorpay.open(options);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -95,7 +98,8 @@ class _PaymentPageState extends State<PaymentScreen> {
                         color: Colors.blue.shade900),
                   ),
                   const SizedBox(height: 10.0),
-                  const Text(' Ice Cream',
+                  const Text(
+                      'Ice Cream', // Removed extra space before 'Ice Cream'
                       style: TextStyle(color: Colors.grey, fontSize: 24.0)),
                 ],
               ),
