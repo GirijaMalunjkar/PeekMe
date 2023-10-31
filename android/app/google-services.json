@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "353321202958",
-    "project_id": "peekme-2101e",
-    "storage_bucket": "peekme-2101e.appspot.com"
+    "project_number": "674544146349",
+    "project_id": "peek-me",
+    "storage_bucket": "peek-me.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:353321202958:android:e6af657cedc9709111935f",
+        "mobilesdk_app_id": "1:674544146349:android:8c5155f523496bd409f324",
         "android_client_info": {
-          "package_name": "peekme.com"
+          "package_name": "com.example.peek_me"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "353321202958-u61cs5865lv4mvkn3bff7egk7bk55al1.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAa9PEhTSXPv-_z-pZwO5Vu1L5QRaE54Ug"
+          "current_key": "AIzaSyABnBBiDhIHySSNDJmzt_G9735xOvJYSFE"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "353321202958-u61cs5865lv4mvkn3bff7egk7bk55al1.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

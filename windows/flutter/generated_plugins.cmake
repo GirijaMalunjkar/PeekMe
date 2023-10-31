@@ -3,10 +3,10 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  cloud_firestore
+  connectivity_plus
   firebase_auth
   firebase_core
-  flutter_secure_storage_windows
+  firebase_storage
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

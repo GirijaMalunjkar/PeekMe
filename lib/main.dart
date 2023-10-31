@@ -1,54 +1,40 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-import 'Screens/Home.dart';
-import 'Screens/BookingPayment.dart';
-import 'Screens/Landing.dart';
-import 'Screens/Login.dart';
-import 'Screens/Profile.dart';
-import 'authentication/RegistrationStep1.dart';
-import 'Screens/ReviewRating.dart';
-import 'Screens/RideListing.dart';
-import 'Screens/BookARide.dart';
+import 'package:flutter/material.dart';
+import 'package:peek_me/authentication/login_screen.dart';
+import 'package:peek_me/authentication/signup_screen.dart';
+import 'package:peek_me/pages/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: FirebaseOptions(
-      apiKey: 'AIzaSyAa9PEhTSXPv-_z-pZwO5Vu1L5QRaE54Ug',
-      authDomain: 'peekme.com',
-      databaseURL:
-      'https://peekme-2101e-default-rtdb.firebaseio.com/',
-      projectId: 'peekme-2101e',
-      storageBucket: 'peekme-2101e.appspot.com',
-      messagingSenderId: '',
-      appId: '1:353321202958:android:e6af657cedc9709111935f',
+      authDomain: "peek-me.firebaseapp.com",
+      databaseURL: "https://peek-me-default-rtdb.firebaseio.com/",
+      storageBucket: "peek-me.appspot.com",
+      apiKey: "AIzaSyABnBBiDhIHySSNDJmzt_G9735xOvJYSFE",
+      appId: "1:674544146349:android:8c5155f523496bd409f324",
+      messagingSenderId: "674544146349",
+      projectId: "peek-me",
     ),
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Uber Clone',
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color.fromRGBO(25, 118, 210, 1.0),
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 3, 108, 6)),
+        useMaterial3: true,
       ),
-      initialRoute: '/registration',
-      routes: {
-        '/': (context) => HomeScreen(),
-        '/landing': (context) => LandingScreen(),
-        '/login': (context) => LoginPage(),
-        '/registration': (context) => RegistrationPage(),
-        '/profile': (context) => UserProfileScreen(),
-        '/review': (context) => ReviewScreen(),
-        '/ride-details': (context) => RideDetailsScreen(),
-        '/payment': (context) => PaymentScreen(),
-        '/book-ride': (context) => BookRideScreen(),
-        },
+      home: HomePage(),
     );
   }
 }
