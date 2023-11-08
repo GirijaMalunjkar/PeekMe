@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:peek_me/global/global_var.dart';
-import 'package:peek_me/methods/common_methods.dart';
-import 'package:peek_me/pages/home_page.dart';
-import 'package:peek_me/widgets/loading_dialog.dart';
+import 'package:user_app/global/global_var.dart';
+import 'package:user_app/methods/common_methods.dart';
+import 'package:user_app/pages/home_page.dart';
+import 'package:user_app/widgets/loading_dialog.dart';
 import '../authentication/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {

@@ -1,6 +1,6 @@
 {
-    "name": "peek_me",
-    "short_name": "peek_me",
+    "name": "user_app",
+    "short_name": "user_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

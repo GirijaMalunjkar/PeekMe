@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import 'package:peek_me/authentication/login_screen.dart';
-import 'package:peek_me/authentication/signup_screen.dart';
-import 'package:peek_me/pages/home_page.dart';
+import 'package:user_app/authentication/login_screen.dart';
+import 'package:user_app/authentication/signup_screen.dart';
+import 'package:user_app/pages/home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

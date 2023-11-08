@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:peek_me/global/global_var.dart';
+import 'package:user_app/global/global_var.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

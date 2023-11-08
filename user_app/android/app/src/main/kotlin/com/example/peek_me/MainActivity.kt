@@ -1,4 +1,4 @@
-package com.example.peek_me
+package com.example.user_app
 
 import io.flutter.embedding.android.FlutterActivity
 
