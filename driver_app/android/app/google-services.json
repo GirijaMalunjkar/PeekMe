@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "674544146349",
+    "firebase_url": "https://peek-me-default-rtdb.firebaseio.com",
+    "project_id": "peek-me",
+    "storage_bucket": "peek-me.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674544146349:android:8c5155f523496bd409f324",
+        "android_client_info": {
+          "package_name": "com.example.peek_me"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABnBBiDhIHySSNDJmzt_G9735xOvJYSFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674544146349:android:7d4273a707feaff809f324",
+        "android_client_info": {
+          "package_name": "com.peekme.driver_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABnBBiDhIHySSNDJmzt_G9735xOvJYSFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
