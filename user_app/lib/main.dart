@@ -1,5 +1,6 @@
 import 'dart:html';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -47,7 +48,9 @@ class MyApp extends StatelessWidget {
             ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 3, 108, 6)),
         useMaterial3: true,
       ),
-      home: HomePage(),
+      home: FirebaseAuth.instance.currentUser == null
+          ? LoginScreen()
+          : HomePage(),
     );
   }
 }
